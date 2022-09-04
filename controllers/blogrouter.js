@@ -8,8 +8,8 @@ blogRouter.get("/", async (request, response) => {
 
 blogRouter.post("/", (request, response) => {
   const blog = new Blog(request.body);
-
-  Blog.save().then((result) => {
+  console.log("the post request enterd", blog);
+  blog.save().then((result) => {
     response.status(201).json(result);
   });
 });
