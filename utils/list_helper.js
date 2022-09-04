@@ -15,7 +15,12 @@ const totalLikes = (blogs) =>{
 }
 
 
+const favoriteBlog =(blogs) =>{
+  let blogLikesarr = (blogs.map(blog => blog.likes))
+  const index =blogLikesarr.indexOf( Math.max(...blogLikesarr));
+  return blogs[index]  
+}
 
 module.exports = {
-  dummy,totalLikes
+  dummy,totalLikes,favoriteBlog
 }
