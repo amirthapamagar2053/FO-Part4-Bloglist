@@ -54,7 +54,7 @@ const mostLikes = (blogs) => {
   );
   return {
     author: author,
-    blogs: highestauthor[author],
+    likes: highestauthor[author],
   };
 };
 
