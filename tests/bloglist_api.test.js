@@ -32,13 +32,22 @@ describe("Http Get Requests", () => {
     Bloglist = new Blog(blogs[1]);
     await Bloglist.save();
   });
-  test("notes are returned as json", async () => {
+  test("Correct number of blogs length", async () => {
     const response = await api
       .get("/api/blogs")
       .expect(200)
       .expect("Content-Type", /application\/json/);
 
     expect(response.body).toHaveLength(blogs.length);
+  }, 10000);
+
+  test("Correct number of blogs length", async () => {
+    const response = await api
+      .get("/api/blogs")
+      .expect(200)
+      .expect("Content-Type", /application\/json/);
+
+    expect(response.body[0].id).toBeDefined();
   }, 10000);
 
   afterAll(() => {
