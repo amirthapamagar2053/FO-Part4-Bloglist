@@ -53,6 +53,32 @@ describe("Http Get Requests", () => {
     expect(contents).toContain("Go To Statement Considered Harmful Second");
   }, 10000);
 
+  test("Verifying if the like property is missing", async () => {
+    const newBlog = {
+      title: "Go To Statement Considered Harmful Second",
+      author: "Edsger W. Dijkstra Second",
+      url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html2",
+    };
+
+    const response = await api
+      .post("/api/blogs")
+      .send(newBlog)
+      .expect(201)
+      .expect("Content-Type", /application\/json/);
+    const blogsAtEnd = await blogHelper.blogsInDb();
+    expect(blogsAtEnd[2].likes).toBe(0);
+  }, 10000);
+
+  test("Verifying if the title and url  property is missing", async () => {
+    const newBlog = {
+      author: "Edsger W. Dijkstra Second Third",
+    };
+
+    const response = await api.post("/api/blogs").send(newBlog).expect(400);
+    // const blogsAtEnd = await blogHelper.blogsInDb();
+    // expect(blogsAtEnd[2].likes).toBe(0);
+  }, 10000);
+
   afterAll(() => {
     mongoose.connection.close();
   });
