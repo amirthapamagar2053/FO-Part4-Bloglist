@@ -8,3 +8,6 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3001/api/blogs HTTP/1.1
+
+###
+DELETE http://localhost:3001/api/blogs/6315b10c53a83eff3b366e8d HTTP/1.1
