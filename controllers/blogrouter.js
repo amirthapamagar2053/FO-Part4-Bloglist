@@ -1,9 +1,10 @@
 const blogRouter = require("express").Router();
 const Blog = require("../models/blog");
+const User = require("../models/user");
 
 blogRouter.get("/", async (request, response) => {
   console.log("the get entered");
-  const blog = await Blog.find({});
+  const blog = await Blog.find({}).populate("user");
   response.json(blog);
 });
 
@@ -15,10 +16,21 @@ blogRouter.post("/", async (request, response) => {
     console.log("the error 400 entered");
     response.status(400).json({ error: "the 400 error occured" });
   } else {
-    // console.log("the request.body is", request.body);
-    let blog = new Blog(request.body);
+    const user = await User.findById(request.body.userId);
+    console.log("The post user is", user);
+
+    const blog = new Blog({
+      title: request.body.title,
+      author: request.body.author,
+      url: request.body.url,
+      likes: request.body.likes,
+      user: user._id,
+    });
+
     const newBlog = await blog.save();
-    // console.log("the newblog is", newBlog);
+    console.log("the newBlog is ", newBlog);
+    user.blogs = user.blogs.concat(newBlog._id);
+    await user.save();
     response.status(201).json(newBlog);
   }
 });
