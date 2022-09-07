@@ -1,6 +1,15 @@
 const blogRouter = require("express").Router();
 const Blog = require("../models/blog");
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
+
+const getTokenFrom = (request) => {
+  const authorization = request.get("authorization");
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    return authorization.substring(7);
+  }
+  return null;
+};
 
 blogRouter.get("/", async (request, response) => {
   console.log("the get entered");
@@ -16,7 +25,13 @@ blogRouter.post("/", async (request, response) => {
     console.log("the error 400 entered");
     response.status(400).json({ error: "the 400 error occured" });
   } else {
-    const user = await User.findById(request.body.userId);
+    const token = getTokenFrom(request);
+    const decodedToken = jwt.verify(token, process.env.SECRET);
+    if (!decodedToken.id) {
+      return response.status(401).json({ error: "token missing or invalid" });
+    }
+    const user = await User.findById(decodedToken.id);
+    // const user = await User.findById(request.body.userId);
     console.log("The post user is", user);
 
     const blog = new Blog({
