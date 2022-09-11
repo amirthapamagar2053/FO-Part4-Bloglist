@@ -1,11 +1,11 @@
 ###
 POST http://localhost:3001/api/blogs  HTTP/1.1
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc5OTZjZTYxMTE0ZTk4ZTkxZTgzOSIsImlhdCI6MTY2MjUzOTE4N30.WFpWqB7NJKAMIpbgNbC0RMjxVzCi4cpvgdxznO2wQDc
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVycm9vdDEyMyIsImlkIjoiNjMxODZlNWE2OTk4ZGQyYzRkMWYwYTZiIiwiaWF0IjoxNjYyNTUxODgyfQ.Us3KYXZg3XSxNwm66Dk538hNl-1kIecqE4XvZ8w6xRE
 
 {
     "_id": "5a422aa71b54a676234d17f8",
-    "title": "Go To Statement Considered Harmful Second created using the token",
+    "title": "Go To Statement Considered Harmful Second created using the token from the middleware Superroot123 after middleware",
     "author": "Edsger W. Dijkstra Second",
     "url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html 2",
     "likes": 5,
@@ -17,8 +17,8 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc5OTZjZ
 GET http://localhost:3001/api/blogs HTTP/1.1
 
 ###
-DELETE http://localhost:3001/api/blogs/6315b10c53a83eff3b366e8d HTTP/1.1
-
+DELETE http://localhost:3001/api/blogs/631887cae96b5753fb0fa536 HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVycm9vdDEyMyIsImlkIjoiNjMxODZlNWE2OTk4ZGQyYzRkMWYwYTZiIiwiaWF0IjoxNjYyNTUyMTg5fQ.ntro-DpUCB-TNB1kla1bOObALmepZ5xLw3xY92SnPbU
 ###
 PUT http://localhost:3001/api/blogs/6315800d37fb75695b8cec50 HTTP/1.1
 Content-Type: application/json
@@ -36,21 +36,19 @@ Content-Type: application/json
 POST http://localhost:3001/api/users 
 Content-Type: application/json
 
-{
-
-    "name":"Matti Luukkainen",
+{   
+    "username":"Superroot1234",
+    "name":"admin",
     "password":"password"
-
 }
 
 ###
 POST http://localhost:3001/api/login
 Content-Type: application/json
 
-   
 {
 
-    "name":"Matti Luukkainen",
+    "username":"Superroot123",
     "password":"password"
 
 }
