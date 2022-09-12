@@ -67,8 +67,12 @@ blogRouter.delete("/:id", async (request, response) => {
     // }
     // const blog = await Blog.findByIdAndRemove(request.params.id);Without using token
     let blog = await Blog.findById(request.params.id);
+    console.log("the blog is", blog);
     console.log("The blog user is", blog.user.toString());
+    console.log("the request is", request.params.id);
+    console.log("the request user is", request.user);
 
+ 
     // if (decodedToken.id === blog.user.toString()) //Used if not using middleware
     if (request.user.id.toString() === blog.user.toString()) {
       const blog = await Blog.findByIdAndRemove(request.params.id);
